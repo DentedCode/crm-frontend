@@ -8,3 +8,8 @@ Here is the playlist https://youtube.com/playlist?list=PLtPNAX49WUFN8yq2vEuAY6Ah
 If you need code before adding Redux in the project , clone from before-redux/toolkit
 
 `git clone -b before-redux/toolkit git@github.com:DentedCode/crm-frontend.git`
+
+### Backend API
+
+Backend api for this app is in the following repo:
+`https://github.com/DentedCode/client-api`

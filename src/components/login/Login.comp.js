@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 
 import { loginPending, loginSuccess, loginFail } from "./loginSlice";
 import { userLogin } from "../../api/userApi";
+import { getUserProfile } from "../../pages/dashboard/userAction";
 
 export const LoginForm = ({ formSwitcher }) => {
   const dispatch = useDispatch();
@@ -52,13 +53,13 @@ export const LoginForm = ({ formSwitcher }) => {
 
     try {
       const isAuth = await userLogin({ email, password });
-      console.log(isAuth);
 
       if (isAuth.status === "error") {
         return dispatch(loginFail(isAuth.message));
       }
 
       dispatch(loginSuccess());
+      dispatch(getUserProfile());
       history.push("/dashboard");
     } catch (error) {
       dispatch(loginFail(error.message));

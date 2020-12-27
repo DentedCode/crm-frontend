@@ -8,8 +8,10 @@ export const Header = () => {
   const history = useHistory();
 
   const logMeOut = () => {
+    sessionStorage.removeItem("accessJWT");
     history.push("/");
   };
+
   return (
     <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
       <Navbar.Brand>

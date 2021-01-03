@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -22,8 +22,12 @@ export const LoginForm = ({ formSwitcher }) => {
 
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  useEffect(() => {
+    sessionStorage.getItem("accessJWT") && history.push("/dashboard");
+  }, [history, isAuth]);
+
+  const [email, setEmail] = useState("e2@e.com");
+  const [password, setPassword] = useState("password");
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

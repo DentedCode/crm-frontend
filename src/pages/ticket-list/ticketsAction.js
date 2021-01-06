@@ -73,7 +73,6 @@ export const closeTicket = (_id) => async (dispatch) => {
   dispatch(closeTicketLoading());
   try {
     const result = await updateTicketStatusClosed(_id);
-    console.log(result);
     if (result.status === "error") {
       return dispatch(closeTicketFail(result.message));
     }

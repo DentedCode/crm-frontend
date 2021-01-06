@@ -9,13 +9,15 @@ import { useParams } from "react-router-dom";
 import { fetchSingleTicket, closeTicket } from "../ticket-list/ticketsAction";
 
 export const Ticket = () => {
-  const { replyMsg } = useSelector((state) => state.tickets);
-
   const { tId } = useParams();
   const dispatch = useDispatch();
-  const { isLoading, error, selectedTicket } = useSelector(
-    (state) => state.tickets
-  );
+  const {
+    isLoading,
+    error,
+    selectedTicket,
+    replyMsg,
+    replyTicketError,
+  } = useSelector((state) => state.tickets);
 
   useEffect(() => {
     dispatch(fetchSingleTicket(tId));
@@ -33,6 +35,9 @@ export const Ticket = () => {
         <Col>
           {isLoading && <Spinner variant="primary" animation="border" />}
           {error && <Alert variant="danger">{error}</Alert>}
+          {replyTicketError && (
+            <Alert variant="danger">{replyTicketError}</Alert>
+          )}
           {replyMsg && <Alert variant="success">{replyMsg}</Alert>}
         </Col>
       </Row>

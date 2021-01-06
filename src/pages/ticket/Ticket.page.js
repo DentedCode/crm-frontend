@@ -6,22 +6,20 @@ import { MessageHistory } from "../../components/message-history/MessageHistory.
 import { UpdateTicket } from "../../components/update-ticket/UpdateTicket.comp";
 import { useParams } from "react-router-dom";
 
-import { fetchSingleTicket } from "../ticket-list/ticketsAction";
+import { fetchSingleTicket, closeTicket } from "../ticket-list/ticketsAction";
 
-// const ticket = tickets[0];
 export const Ticket = () => {
+  const { replyMsg } = useSelector((state) => state.tickets);
+
   const { tId } = useParams();
   const dispatch = useDispatch();
   const { isLoading, error, selectedTicket } = useSelector(
     (state) => state.tickets
   );
 
-  const [message, setMessage] = useState("");
-  const [ticket, setTicket] = useState("");
-
   useEffect(() => {
     dispatch(fetchSingleTicket(tId));
-  }, [message, tId, dispatch]);
+  }, [tId, dispatch]);
 
   return (
     <Container>
@@ -30,10 +28,12 @@ export const Ticket = () => {
           <PageBreadcrumb page="Ticket" />
         </Col>
       </Row>
+
       <Row>
         <Col>
           {isLoading && <Spinner variant="primary" animation="border" />}
           {error && <Alert variant="danger">{error}</Alert>}
+          {replyMsg && <Alert variant="success">{replyMsg}</Alert>}
         </Col>
       </Row>
       <Row>
@@ -47,7 +47,13 @@ export const Ticket = () => {
           <div className="status">Status: {selectedTicket.status}</div>
         </Col>
         <Col className="text-right">
-          <Button variant="outline-info">Close Ticket</Button>
+          <Button
+            variant="outline-info"
+            onClick={() => dispatch(closeTicket(tId))}
+            disabled={selectedTicket.status === "Closed"}
+          >
+            Close Ticket
+          </Button>
         </Col>
       </Row>
       <Row className="mt-4">

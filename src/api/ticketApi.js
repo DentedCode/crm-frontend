@@ -2,6 +2,7 @@ import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
 const getSingleTicketUlr = rootUrl + "ticket/";
+const closeTicketUrl = rootUrl + "ticket/close-ticket/";
 
 export const getAllTickets = () => {
   return new Promise(async (resolve, reject) => {
@@ -44,6 +45,27 @@ export const updateReplyTicket = (_id, msgObj) => {
           Authorization: sessionStorage.getItem("accessJWT"),
         },
       });
+
+      resolve(result.data);
+    } catch (error) {
+      console.log(error.message);
+      reject(error);
+    }
+  });
+};
+
+export const updateTicketStatusClosed = (_id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.patch(
+        closeTicketUrl + _id,
+        {},
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
       resolve(result.data);
     } catch (error) {

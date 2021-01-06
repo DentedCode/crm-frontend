@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 import { replyOnTicket } from "../../pages/ticket-list/ticketsAction";
 
 export const UpdateTicket = ({ _id }) => {
-  const { replyMsg } = useSelector((state) => state.tickets);
   const dispatch = useDispatch();
   const {
     user: { name },
@@ -31,8 +30,6 @@ export const UpdateTicket = ({ _id }) => {
 
   return (
     <div>
-      {replyMsg && <Alert variant="success">{replyMsg}</Alert>}
-
       <Form onSubmit={handleOnSubmit}>
         <Form.Label>Reply</Form.Label>
         <Form.Text>

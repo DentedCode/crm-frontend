@@ -31,7 +31,7 @@ export const TicketTable = () => {
                 <Link to={`/ticket/${row._id}`}>{row.subject}</Link>
               </td>
               <td>{row.status}</td>
-              <td>{row.openAt}</td>
+              <td>{row.openAt && new Date(row.openAt).toLocaleString()}</td>
             </tr>
           ))
         ) : (

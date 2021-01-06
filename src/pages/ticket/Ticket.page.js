@@ -23,13 +23,6 @@ export const Ticket = () => {
     dispatch(fetchSingleTicket(tId));
   }, [message, tId, dispatch]);
 
-  const handleOnChange = (e) => {
-    setMessage(e.target.value);
-  };
-
-  const handleOnSubmit = () => {
-    alert("Form submited!");
-  };
   return (
     <Container>
       <Row>
@@ -46,7 +39,11 @@ export const Ticket = () => {
       <Row>
         <Col className="text-weight-bolder text-secondary">
           <div className="subject">Subject: {selectedTicket.subject}</div>
-          <div className="date">Ticket Opened: {selectedTicket.openAt}</div>
+          <div className="date">
+            Ticket Opened:{" "}
+            {selectedTicket.openAt &&
+              new Date(selectedTicket.openAt).toLocaleString()}
+          </div>
           <div className="status">Status: {selectedTicket.status}</div>
         </Col>
         <Col className="text-right">
@@ -64,11 +61,7 @@ export const Ticket = () => {
 
       <Row className="mt-4">
         <Col>
-          <UpdateTicket
-            msg={message}
-            handleOnChange={handleOnChange}
-            handleOnSubmit={handleOnSubmit}
-          />
+          <UpdateTicket _id={tId} />
         </Col>
       </Row>
     </Container>

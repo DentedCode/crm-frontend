@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { openNewTicket } from "./addTicketAction";
 import { shortText } from "../../utils/validation";
+import { restSuccessMSg } from "./addTicketSlicer";
 
 import "./add-ticket-form.style.css";
 
@@ -39,7 +40,11 @@ export const AddTicketForm = () => {
   const [frmData, setFrmData] = useState(initialFrmDt);
   const [frmDataErro, setFrmDataErro] = useState(initialFrmError);
 
-  useEffect(() => {}, [frmData, frmDataErro]);
+  useEffect(() => {
+    return () => {
+      successMsg && dispatch(restSuccessMSg());
+    };
+  }, [dispatch, frmData, frmDataErro]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

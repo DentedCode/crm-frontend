@@ -57,6 +57,7 @@ const RegistrationForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    console.log(newUser);
   };
 
   return (
@@ -79,6 +80,7 @@ const RegistrationForm = () => {
                 value={newUser.name}
                 onChange={handleOnChange}
                 placeholder="Your name"
+                required
               />
             </Form.Group>
 
@@ -90,6 +92,7 @@ const RegistrationForm = () => {
                 value={newUser.phone}
                 onChange={handleOnChange}
                 placeholder="Phone"
+                required
               />
             </Form.Group>
 
@@ -101,6 +104,7 @@ const RegistrationForm = () => {
                 value={newUser.email}
                 onChange={handleOnChange}
                 placeholder="Enter email"
+                required
               />
             </Form.Group>
 
@@ -112,6 +116,7 @@ const RegistrationForm = () => {
                 value={newUser.company}
                 onChange={handleOnChange}
                 placeholder="Company name"
+                required
               />
             </Form.Group>
 
@@ -123,6 +128,7 @@ const RegistrationForm = () => {
                 value={newUser.address}
                 onChange={handleOnChange}
                 placeholder="Full address"
+                required
               />
             </Form.Group>
 
@@ -134,6 +140,7 @@ const RegistrationForm = () => {
                 value={newUser.password}
                 onChange={handleOnChange}
                 placeholder="Password"
+                required
               />
             </Form.Group>
 
@@ -145,6 +152,7 @@ const RegistrationForm = () => {
                 value={newUser.confirmPass}
                 onChange={handleOnChange}
                 placeholder="Confirm Password"
+                required
               />
             </Form.Group>
             <Form.Text>

@@ -5,7 +5,7 @@ import "./App.css";
 import { PrivateRoute } from "./components/private-route/PrivateRoute.comp";
 import { DefaultLayout } from "./layout/DefaultLayout";
 import { Dashboard } from "./pages/dashboard/Dashboard.page";
-
+import { UserVerification } from "./pages/user-verification/UserVerification.page";
 import { Entry } from "./pages/entry/Entry.page";
 import { Registration } from "./pages/registration/Registration.page";
 import { AddTicket } from "./pages/new-ticket/AddTicket.page";
@@ -22,6 +22,9 @@ function App() {
           </Route>
           <Route exact path="/registration">
             <Registration />
+          </Route>
+          <Route exact path="/verification/:_id/:email">
+            <UserVerification />
           </Route>
 
           <PrivateRoute path="/dashboard">

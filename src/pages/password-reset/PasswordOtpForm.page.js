@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Jumbotron } from "react-bootstrap";
-import { LoginForm } from "../../components/login/Login.comp";
 import { ResetPassword } from "../../components/password-reset/PasswordReset.comp";
+import UpdatePasswordForm from "../../components/password-reset/UpdatePasswordForm.comp";
 
-import "./entry.style.css";
+import "./passwordOtpForm.style.css";
 
 //Workflow
 
-// [] Create password reset page
+// [x] Create password reset page
 // [] Add request OTP form
 // [] Add redux store with Redux-toolkit to handle the network status
 // [] sent OTP to email from API (API Already created)
@@ -18,30 +19,16 @@ import "./entry.style.css";
 // [] Add reducer through Redux-toolkit to handle the network status and provide the feedback to the user
 // [] Send email, OTP and new password to update the password.
 
-export const Entry = () => {
-	const [frmLoad, setFrmLoad] = useState("login");
-
-	const handleOnResetSubmit = e => {
-		e.preventDefault();
-	};
-
-	const formSwitcher = frmType => {
-		setFrmLoad(frmType);
-	};
+export const PasswordOtpForm = () => {
+	const { showUpdatePassForm } = useSelector(state => state.password);
 
 	return (
 		<div className="entry-page bg-info">
 			<Jumbotron className="form-box">
-				{frmLoad === "login" && <LoginForm formSwitcher={formSwitcher} />}
-
-				{frmLoad === "rest" && (
-					<ResetPassword
-						// handleOnChange={handleOnChange}
-						handleOnResetSubmit={handleOnResetSubmit}
-						formSwitcher={formSwitcher}
-						// email={email}
-					/>
-				)}
+				{showUpdatePassForm ? <UpdatePasswordForm /> : <ResetPassword />}
+				<div className="text-center">
+					<a href="/">Login Now</a>
+				</div>
 			</Jumbotron>
 		</div>
 	);

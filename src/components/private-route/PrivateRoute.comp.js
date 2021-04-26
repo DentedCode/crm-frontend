@@ -9,31 +9,40 @@ import { fetchNewAccessJWT } from "../../api/userApi";
 import { DefaultLayout } from "../../layout/DefaultLayout";
 
 export const PrivateRoute = ({ children, ...rest }) => {
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.login);
-  const { user } = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+	const { isAuth } = useSelector(state => state.login);
+	const { user } = useSelector(state => state.user);
 
-  useEffect(() => {
-    const updateAccessJWT = async () => {
-      const result = await fetchNewAccessJWT();
-      result && dispatch(loginSuccess());
-    };
+	useEffect(() => {
+		const updateAccessJWT = async () => {
+			const result = await fetchNewAccessJWT();
+			result && dispatch(loginSuccess());
+		};
 
-    !user._id && dispatch(getUserProfile());
+		!user._id && dispatch(getUserProfile());
 
-    !sessionStorage.getItem("accessJWT") &&
-      localStorage.getItem("crmSite") &&
-      updateAccessJWT();
+		!sessionStorage.getItem("accessJWT") &&
+			localStorage.getItem("crmSite") &&
+			updateAccessJWT();
 
-    !isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
-  }, [dispatch, isAuth, user._id]);
+		!isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
+	}, [dispatch, isAuth, user._id]);
 
-  return (
-    <Route
-      {...rest}
-      render={() =>
-        isAuth ? <DefaultLayout>{children}</DefaultLayout> : <Redirect to="/" />
-      }
-    />
-  );
+	return (
+		<Route
+			{...rest}
+			render={({ location }) =>
+				isAuth ? (
+					<DefaultLayout>{children}</DefaultLayout>
+				) : (
+					<Redirect
+						to={{
+							pathname: "/",
+							state: { from: location },
+						}}
+					/>
+				)
+			}
+		/>
+	);
 };

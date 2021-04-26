@@ -31,18 +31,22 @@ function App() {
 						<UserVerification />
 					</Route>
 
-					<PrivateRoute path="/dashboard">
+					<PrivateRoute exact path="/dashboard">
 						<Dashboard />
 					</PrivateRoute>
-					<PrivateRoute path="/add-ticket">
+					<PrivateRoute exact path="/add-ticket">
 						<AddTicket />
 					</PrivateRoute>
-					<PrivateRoute path="/tickets">
-						<TicketLists />
-					</PrivateRoute>
-					<PrivateRoute path="/ticket/:tId">
+					<PrivateRoute exact path="/ticket/:tId">
 						<Ticket />
 					</PrivateRoute>
+					<PrivateRoute exact path="/tickets">
+						<TicketLists />
+					</PrivateRoute>
+
+					<Route path="*">
+						<h1>404 Page not found</h1>
+					</Route>
 				</Switch>
 			</Router>
 		</div>
